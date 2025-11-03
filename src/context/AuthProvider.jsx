@@ -52,7 +52,8 @@ export default function AuthProvider({children}){
         continueWithGoogle,
         updateUserProfile,
         logoutUser,
-        loading
+        loading,
+        setLoading
     }
     return(
         <AuthContext value={authInfo}>

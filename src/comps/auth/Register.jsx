@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 
 export default function Register() {
-    const { createUser, updateUserProfile, continueWithGoogle } = useContext(AuthContext);
+    const { createUser, updateUserProfile, continueWithGoogle, setLoading } = useContext(AuthContext);
     const [ error, setError ]  = useState('');
     function handleSubmit(e){
         e.preventDefault();
@@ -21,9 +21,27 @@ export default function Register() {
             .then(() => {
                 updateUserProfile({displayName, photoURL});
                 toast.success('Welcome');
+                const newUser = { name: displayName, email: email, image: photoURL }
+                fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(newUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.insertedId){
+                            console.log('user is added to db');
+                        }
+                    })
+                    .catch(error => console.log(error.message));
                 e.target.reset();
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                setError(error.code);
+                setLoading(false);
+            });
     }
     function handleGoogleAuth(){
         continueWithGoogle()

@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       { index: true, element: <SuspenseWrapper><Home /></SuspenseWrapper> },
       { path: '/login', element: <SuspenseWrapper><Login /></SuspenseWrapper> },
       { path: '/register', element: <SuspenseWrapper><Register /></SuspenseWrapper> },
-      { path: '/all-products', element: <PrivateRoute> <SuspenseWrapper><AllProducts /></SuspenseWrapper> </PrivateRoute> },
+      { path: '/all-products', element: <SuspenseWrapper><AllProducts /></SuspenseWrapper> },
       { path: '/my-products', element: <PrivateRoute> <SuspenseWrapper><MyProducts /></SuspenseWrapper> </PrivateRoute> },
       { path: '/my-bids', element: <PrivateRoute> <SuspenseWrapper><MyBids /></SuspenseWrapper> </PrivateRoute> },
       { path: '/create-products', element: <PrivateRoute> <SuspenseWrapper><CreateProducts /></SuspenseWrapper> </PrivateRoute> },
