@@ -1,0 +1,18 @@
+body{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    background-color: #F5F5F5;
+}
+#root{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main{
+    flex-grow: 1;
+    width: 100%;
+}
+.containerr{
+    max-width: 1440px;
+    margin: auto;
+}
