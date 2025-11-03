@@ -18,7 +18,6 @@ export default function AuthProvider({children}){
     // continue with Google
     const googleProvider = new GoogleAuthProvider();
     function continueWithGoogle(){
-        setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
     // update user profile

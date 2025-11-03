@@ -1,26 +1,34 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 export default function Register() {
     const { createUser, updateUserProfile, continueWithGoogle } = useContext(AuthContext);
+    const [ error, setError ]  = useState('');
     function handleSubmit(e){
         e.preventDefault();
         const displayName = e.target.name.value.trim();
         const email = e.target.email.value.trim();
         const photoURL = e.target.photoURL.value.trim();
         const password = e.target.password.value.trim();
+        setError('');
+        if(password.length < 6){
+            setError('Password should be atleast 6 characters!');
+            return;
+        }
         createUser(email, password)
             .then(() => {
                 updateUserProfile({displayName, photoURL});
+                toast.success('Welcome');
                 e.target.reset();
             })
             .catch(error => console.log(error));
     }
     function handleGoogleAuth(){
         continueWithGoogle()
-            .then(result => console.log(result))
-            .catch(error => console.log(error));
+            .then(() => toast.success('succes'))
+            .catch(error => toast.warning(error.code));
     }
     return (
         <section className="hero py-10">
@@ -41,6 +49,9 @@ export default function Register() {
                                 <input type="url" className="input w-full" placeholder="Valid URL" name='photoURL' required />
                                 <label className="label">Password</label>
                                 <input type="password" className="input w-full" placeholder="Password" name='password' required />
+                                {
+                                    error && <p className="mt-2 text-base text-center text-red-500">{error}</p>
+                                }
                                 <button className="btn btn-neutral mt-4" type="submit">Register</button>
                                 <p className="text-center my-2">Or</p>
                                 <button className="btn bg-white text-black border-[#e5e5e5]" type="button" onClick={handleGoogleAuth}>

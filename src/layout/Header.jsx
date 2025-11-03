@@ -8,9 +8,13 @@ export default function Header() {
     const navLinks = <>
         <li> <NavLink to='/'>Home</NavLink> </li>
         <li> <NavLink to='/all-products'>All Products</NavLink> </li>
-        <li> <NavLink to='/my-products'>My Products</NavLink> </li>
-        <li> <NavLink to='/my-bids'>My Bids</NavLink> </li>
-        <li> <NavLink to='/create-products'>Create Products</NavLink> </li>
+        {
+            currentUser && <>
+                <li> <NavLink to='/my-products'>My Products</NavLink> </li>
+                <li> <NavLink to='/my-bids'>My Bids</NavLink> </li>
+                <li> <NavLink to='/create-products'>Create Products</NavLink> </li>
+            </>
+        }
     </>;
     const handleLogout = () => {
         logoutUser()
@@ -43,7 +47,7 @@ export default function Header() {
                         loading ? <span className="loading loading-dots loading-xl mr-3"></span> : currentUser ? <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img alt='alt' src={currentUser.photoURL}/>
+                                    <img alt='alt' src={currentUser.photoURL} />
                                 </div>
                             </div>
                             <ul
