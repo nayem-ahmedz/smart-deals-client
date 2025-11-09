@@ -38,6 +38,16 @@ export default function AuthProvider({children}){
             if(user){
                 setCurrentUser(user);
                 setLoading(false);
+                const loggedInUser = {email: user.email};
+                fetch('http://localhost:3000/get-token', {
+                    method: 'post',
+                    headers: {
+                        'content-type' : 'application/json'
+                    },
+                    body: JSON.stringify(loggedInUser)
+                })
+                  .then(res => res.json())
+                  .then(data => console.log(data));
             } else{
                 setCurrentUser(null);
                 setLoading(false);
