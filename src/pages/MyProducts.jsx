@@ -5,7 +5,11 @@ export default function MyProducts(){
     const [ myProducts, setMyProducts ] = useState([]);
     const { currentUser } = useContext(AuthContext);
     useEffect(() => {
-        fetch(`http://localhost:3000/products?email=${currentUser.email}`)
+        fetch(`http://localhost:3000/products?email=${currentUser.email}`, {
+            headers: {
+                'authorization' : `Bearer ${localStorage.getItem('token')}`
+            }
+        })
           .then(res => res.json())
           .then(data => console.log(data))
           .catch(error => console.log(error.message));

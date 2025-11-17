@@ -1,20 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
 
 export default function MyBids(){
     const [ myBids, setMyBids ] = useState([]);
     const { currentUser } = useContext(AuthContext);
     useEffect(() => {
-        fetch(`http://localhost:3000/bids?email=${currentUser.email}`, {
-            headers: {
-                'Authorization' : `Bearer ${currentUser.accessToken}`
-            }
-        })
-          .then(res => res.json())
-          .then(data => setMyBids(data))
-          .catch(error => console.log(error.message));
+        // fetch(`http://localhost:3000/bids?email=${currentUser.email}`, {
+        //     headers: {
+        //         'Authorization' : `Bearer ${currentUser.accessToken}`
+        //     }
+        // })
+        //   .then(res => res.json())
+        //   .then(data => setMyBids(data))
+        //   .catch(error => console.log(error.message));
+        axios.get(`http://localhost:3000/bids?email=${currentUser.email}`)
+          .then(data => {
+            console.log(data);
+            setMyBids(data.data);
+          })
+          .catch(error => console.log(error));
     }, []);
-    console.log(myBids);
+    // console.log(myBids);
     return(
         <section>
             <h2 className="text-3xl text-center my-4">My Bids : {myBids.length || 0}</h2>

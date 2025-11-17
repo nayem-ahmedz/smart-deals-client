@@ -47,8 +47,12 @@ export default function AuthProvider({children}){
                     body: JSON.stringify(loggedInUser)
                 })
                   .then(res => res.json())
-                  .then(data => console.log(data));
+                  .then(data => {
+                    console.log(data);
+                    localStorage.setItem('token', data.token);
+                  });
             } else{
+                localStorage.removeItem('token');
                 setCurrentUser(null);
                 setLoading(false);
             }
