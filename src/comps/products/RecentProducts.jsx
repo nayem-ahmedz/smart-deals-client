@@ -3,6 +3,8 @@ import Card from "./Card";
 
 export default function RecentProducts({data}){
     const [products, setProducts] = useState(use(data));
+    // const response = use(data);
+    // console.log(response);
     return(
         <section>
             <h2 className="text-3xl text-center my-4">Recent Products</h2>

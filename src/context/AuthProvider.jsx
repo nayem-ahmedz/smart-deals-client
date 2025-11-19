@@ -39,7 +39,7 @@ export default function AuthProvider({children}){
                 setCurrentUser(user);
                 setLoading(false);
                 const loggedInUser = {email: user.email};
-                fetch('http://localhost:3000/get-token', {
+                fetch('https://smart-deeals-server.vercel.app/get-token', {
                     method: 'post',
                     headers: {
                         'content-type' : 'application/json'

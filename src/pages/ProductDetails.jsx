@@ -3,7 +3,10 @@ import { Link, useLoaderData } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 
 export default function ProductDetails() {
-    const product = useLoaderData();
+    const productData = useLoaderData();
+    // console.log(productData);
+    const product = productData.data;
+    // console.log(product)
     const { currentUser } = useContext(AuthContext);
     const modalRef = useRef(null);
     const [existingBids, setExistingBids] = useState([]);
@@ -17,7 +20,7 @@ export default function ProductDetails() {
             price: price
         }
         console.log(newBid);
-        fetch('http://localhost:3000/bids', {
+        fetch('https://smart-deeals-server.vercel.app/bids', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -28,7 +31,7 @@ export default function ProductDetails() {
             .then(data => console.log(data));
     }
     useEffect(() => {
-        fetch(`http://localhost:3000/bids/products/${product._id}`, {
+        fetch(`https://smart-deeals-server.vercel.app/bids/products/${product._id}`, {
             headers: {
                 'authorization': `Bearer ${currentUser.accessToken}`
             }

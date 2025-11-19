@@ -5,7 +5,7 @@ export default function Card({product}) {
         <div className="card bg-base-100 shadow-sm">
             <div className="card-body gap-0">
                 <figure className="aspect-3/2">
-                    <img src={product.image} alt={product.title} className="rounded-xl" />
+                    <img src={product.image} alt={product.title} className="rounded-xl w-full h-full" />
                 </figure>
                 <h2 className="card-title mt-2">{product.title}</h2>
                 <p className="mt-1 mb-2 font-medium">$ {product.price_min} - {product.price_max}</p>

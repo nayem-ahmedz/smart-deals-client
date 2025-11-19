@@ -2,7 +2,9 @@ import { useLoaderData } from "react-router";
 import Card from "../comps/products/Card";
 
 export default function AllProducts(){
-    const products = useLoaderData();
+    const productsData = useLoaderData();
+    // console.log(productsData)
+    const products = productsData.data;
     return(
         <section>
             <h2 className="text-3xl text-center my-4">All Products</h2>

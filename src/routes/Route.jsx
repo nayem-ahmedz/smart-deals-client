@@ -4,6 +4,7 @@ import Root from "../layout/Root";
 import SuspenseWrapper from "../comps/utils/SuspenseWrapper";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../comps/utils/ErrorPage";
+import axiosInstance from "../hooks/axiosInstact";
 const Home = lazy(() => import('../pages/Home'));
 const Login = lazy(() => import('../comps/auth/Login'));
 const Register = lazy(() => import('../comps/auth/Register'));
@@ -24,11 +25,11 @@ export const router = createBrowserRouter([
       { path: '/register', element: <SuspenseWrapper><Register /></SuspenseWrapper> },
       {
         path: '/all-products',
-        loader: function(){ return fetch('http://localhost:3000/products') },
+        loader: function(){ return axiosInstance.get('/products') },
         element: <SuspenseWrapper><AllProducts /></SuspenseWrapper> },
       {
         path: '/all-products/:id',
-        loader: ({ params }) => fetch(`http://localhost:3000/products/${params.id}`),
+        loader: ({ params }) => axiosInstance.get(`/products/${params.id}`),
         element: <PrivateRoute><SuspenseWrapper> <ProductDetails /> </SuspenseWrapper></PrivateRoute>
       },
       { path: '/my-products', element: <PrivateRoute> <SuspenseWrapper><MyProducts /></SuspenseWrapper> </PrivateRoute> },

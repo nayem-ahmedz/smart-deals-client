@@ -14,7 +14,7 @@ export default function MyBids(){
         //   .then(res => res.json())
         //   .then(data => setMyBids(data))
         //   .catch(error => console.log(error.message));
-        axios.get(`http://localhost:3000/bids?email=${currentUser.email}`)
+        axios.get(`https://smart-deeals-server.vercel.app/bids?email=${currentUser.email}`)
           .then(data => {
             console.log(data);
             setMyBids(data.data);
